@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-# Create your views here.
+from polls.models import Produto
 
 def index(request):
-  return HttpResponse("SportZone")
+    produtos = Produto.objects.order_by('nome')
+    context = {'produtos': produtos}
+    return render(request, 'index.html', context)
+
