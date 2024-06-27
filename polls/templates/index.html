@@ -130,12 +130,15 @@
     </style>
 </head>
 <body>
-<header>
+  <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">SportZone</a>
+            <a class="navbar-brand" href="{% url 'index' %}">SportZone</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-secondary ml-auto" href="{% url 'login_view' %}">Login</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link btn btn-secondary ml-auto" href="/admin">Admin</a>
                     </li>
@@ -144,7 +147,6 @@
         </div>
     </nav>
 </header>
-
 <div class="logo-container text-center mt-5 pt-5">
     <h2 class="project-name">SportZone</h2>
 </div>
