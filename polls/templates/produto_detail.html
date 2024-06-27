@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ produto.nome }} - Detalhes do Produto</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        /* Estilos personalizados */
+        .product-info {
+            margin-top: 20px;
+        }
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .product-description {
+            margin-top: 20px;
+        }
+        .product-actions {
+            margin-top: 20px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        footer {
+            background-color: #224488;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+ 
+        .menu-button {
+            display: block;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #212529;
+            transition: background-color 0.3s;
+        }
+
+        .menu-button:hover {
+            background-color: #e9ecef;
+        }
+
+        body {
+            padding-top: 70px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin-bottom: 60px; /* Para dar espaço ao footer */
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            background-color: #333333 !important;
+        }
+
+        .navbar-brand {
+            color: #fff !important;
+            cursor: pointer; /* Adicione cursor pointer para indicar que é clicável */
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="/">SportZone</a> <!-- Alterado para redirecionar para a página inicial -->
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-secondary ml-auto" href="/admin">Admin</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>{{ produto.nome }}</h1>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}" class="product-image">
+            </div>
+            <div class="col-md-6">
+                <div class="product-info">
+                    <p><strong>Preço:</strong> R$ {{ produto.preco_venda }}</p>
+                    <p><strong>Descrição:</strong> {{ produto.descricao }}</p>
+                </div>
+                
+                <div class="product-actions">
+                    <form action="{% url 'carrinho_compra' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="produto_id" value="{{ produto.id }}">
+                        <button type="submit" class="btn btn-primary">Adicionar ao Carrinho</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="product-description">
+            <h2>Descrição Detalhada</h2>
+            <p>{{ produto.descricao_detalhada }}</p>
+        </div>
+    </div>
+    <footer class="bg-primary text-white text-center py-3">
+        <p>&copy; 2024 SportZone | Contato: joao.miranda20018@gmail.com</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
